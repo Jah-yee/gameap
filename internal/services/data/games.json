@@ -53,7 +53,7 @@
             {
               "var": "default_map",
               "default": "Ragnarok",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -115,6 +115,12 @@
               "i18n": {
                 "ru": {
                   "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
                 }
               }
             },
@@ -130,6 +136,12 @@
               "i18n": {
                 "ru": {
                   "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
                 }
               }
             },
@@ -145,6 +157,12 @@
               "i18n": {
                 "ru": {
                   "info": "Пароль для входа"
+                },
+                "es": {
+                  "info": "Contraseña de acceso"
+                },
+                "de": {
+                  "info": "Zugangspasswort"
                 }
               }
             }
@@ -279,19 +297,39 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "dm_crossfire",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -310,7 +348,17 @@
                 "dm_subtransit",
                 "dm_undertow"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -321,7 +369,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -371,19 +429,39 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "de_dust2",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -416,18 +494,38 @@
                 "de_vegas",
                 "de_vertigo"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "fps",
               "default": "500",
-              "info": "Server FPS (tickrate)",
+              "info": "Server FPS (sys_ticrate)",
               "admin_var": true,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "FPS сервера (sys_ticrate)"
+                },
+                "es": {
+                  "info": "FPS del servidor (sys_ticrate)"
+                },
+                "de": {
+                  "info": "Server-FPS (sys_ticrate)"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -438,7 +536,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -478,6 +586,12 @@
               "i18n": {
                 "ru": {
                   "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
                 }
               }
             },
@@ -486,7 +600,13 @@
               "command": "stats",
               "i18n": {
                 "ru": {
-                  "info": "Статистика"
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
                 }
               }
             }
@@ -495,7 +615,7 @@
             {
               "var": "default_map",
               "default": "de_dust2",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -519,7 +639,17 @@
                 "de_train",
                 "de_vertigo"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "server_token",
@@ -530,18 +660,38 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Токен сервера (sv_setsteamaccount)"
+                },
+                "es": {
+                  "info": "Token del servidor (sv_setsteamaccount)"
+                },
+                "de": {
+                  "info": "Server-Token (sv_setsteamaccount)"
+                }
+              }
             },
             {
               "var": "hostname",
               "default": "GameAP CS2 Server",
-              "info": "Server hostname",
+              "info": "Server name",
               "admin_var": false,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Название сервера"
+                },
+                "es": {
+                  "info": "Nombre del servidor"
+                },
+                "de": {
+                  "info": "Servername"
+                }
+              }
             }
           ],
           "remote_repository_linux": "https://cdn.gameap.com/cs2/default_linux.tar.gz",
@@ -578,19 +728,39 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "de_dust2",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -629,7 +799,17 @@
                 "de_tuscan",
                 "de_vertigo"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -640,7 +820,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             },
             {
               "var": "server_token",
@@ -651,7 +841,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Токен сервера (sv_setsteamaccount)"
+                },
+                "es": {
+                  "info": "Token del servidor (sv_setsteamaccount)"
+                },
+                "de": {
+                  "info": "Server-Token (sv_setsteamaccount)"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -688,19 +888,39 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "de_dust2",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -725,7 +945,17 @@
                 "de_tides",
                 "de_train"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -736,7 +966,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -773,19 +1013,39 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "de_dust2",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -810,7 +1070,17 @@
                 "de_tides",
                 "de_train"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -821,7 +1091,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             },
             {
               "var": "tickrate",
@@ -832,7 +1112,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Тикрейт"
+                },
+                "es": {
+                  "info": "Tickrate"
+                },
+                "de": {
+                  "info": "Tickrate"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -869,29 +1159,69 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             },
             {
-              "info": "Last disconnect players",
+              "info": "Recently disconnected players",
               "command": "amx_last",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Последние отключившиеся игроки"
+                },
+                "es": {
+                  "info": "Jugadores desconectados recientemente"
+                },
+                "de": {
+                  "info": "Zuletzt getrennte Spieler"
+                }
+              }
             },
             {
-              "info": "Admins on servers",
+              "info": "Admins on the server",
               "command": "amx_who",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Админы на сервере"
+                },
+                "es": {
+                  "info": "Administradores conectados"
+                },
+                "de": {
+                  "info": "Admins auf dem Server"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "de_dust2",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -923,18 +1253,38 @@
                 "de_train",
                 "de_vertigo"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "fps",
               "default": "500",
-              "info": "Server FPS (tickrate)",
+              "info": "Server FPS (sys_ticrate)",
               "admin_var": true,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "FPS сервера (sys_ticrate)"
+                },
+                "es": {
+                  "info": "FPS del servidor (sys_ticrate)"
+                },
+                "de": {
+                  "info": "Server-FPS (sys_ticrate)"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -945,7 +1295,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             }
           ],
           "remote_repository_linux": "https://cdn.gameap.com/cstrike-1.6/amxx.tar.xz",
@@ -968,19 +1328,39 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "de_dust2",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -1012,18 +1392,38 @@
                 "de_train",
                 "de_vertigo"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "fps",
               "default": "500",
-              "info": "Server FPS (tickrate)",
+              "info": "Server FPS (sys_ticrate)",
               "admin_var": true,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "FPS сервера (sys_ticrate)"
+                },
+                "es": {
+                  "info": "FPS del servidor (sys_ticrate)"
+                },
+                "de": {
+                  "info": "Server-FPS (sys_ticrate)"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -1034,7 +1434,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -1057,29 +1467,69 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             },
             {
-              "info": "Last disconnect players",
+              "info": "Recently disconnected players",
               "command": "amx_last",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Последние отключившиеся игроки"
+                },
+                "es": {
+                  "info": "Jugadores desconectados recientemente"
+                },
+                "de": {
+                  "info": "Zuletzt getrennte Spieler"
+                }
+              }
             },
             {
-              "info": "Admins on servers",
+              "info": "Admins on the server",
               "command": "amx_who",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Админы на сервере"
+                },
+                "es": {
+                  "info": "Administradores conectados"
+                },
+                "de": {
+                  "info": "Admins auf dem Server"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "de_dust2",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -1111,18 +1561,38 @@
                 "de_train",
                 "de_vertigo"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "fps",
               "default": "500",
-              "info": "Server FPS (tickrate)",
+              "info": "Server FPS (sys_ticrate)",
               "admin_var": true,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "FPS сервера (sys_ticrate)"
+                },
+                "es": {
+                  "info": "FPS del servidor (sys_ticrate)"
+                },
+                "de": {
+                  "info": "Server-FPS (sys_ticrate)"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -1133,7 +1603,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             }
           ],
           "remote_repository_linux": "https://cdn.gameap.com/cstrike-1.6/rehlds-amxx-reunion.tar.xz",
@@ -1170,19 +1650,39 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "de_dust2_cz",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -1211,18 +1711,38 @@
                 "de_truth_cz",
                 "de_vostok_cz"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "fps",
               "default": "500",
-              "info": "Server FPS (tickrate)",
+              "info": "Server FPS (sys_ticrate)",
               "admin_var": true,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "FPS сервера (sys_ticrate)"
+                },
+                "es": {
+                  "info": "FPS del servidor (sys_ticrate)"
+                },
+                "de": {
+                  "info": "Server-FPS (sys_ticrate)"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -1233,7 +1753,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -1270,19 +1800,39 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "dcdm5",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -1296,18 +1846,38 @@
                 "dmc_e1m2",
                 "p_se_3"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "fps",
               "default": "500",
-              "info": "Server FPS (tickrate)",
+              "info": "Server FPS (sys_ticrate)",
               "admin_var": true,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "FPS сервера (sys_ticrate)"
+                },
+                "es": {
+                  "info": "FPS del servidor (sys_ticrate)"
+                },
+                "de": {
+                  "info": "Server-FPS (sys_ticrate)"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -1318,7 +1888,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -1355,19 +1935,39 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "dod_caen",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -1396,18 +1996,38 @@
                 "dod_vicenza",
                 "dod_zalec"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "fps",
               "default": "500",
-              "info": "Server FPS (tickrate)",
+              "info": "Server FPS (sys_ticrate)",
               "admin_var": true,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "FPS сервера (sys_ticrate)"
+                },
+                "es": {
+                  "info": "FPS del servidor (sys_ticrate)"
+                },
+                "de": {
+                  "info": "Server-FPS (sys_ticrate)"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -1418,7 +2038,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -1455,19 +2085,39 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "dod_anzio",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -1483,7 +2133,17 @@
                 "dod_kalt",
                 "dod_palermo"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -1494,7 +2154,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -1532,13 +2202,23 @@
             {
               "var": "name",
               "default": "GameAP Factorio Server",
-              "info": "Server Name",
+              "info": "Server name",
               "admin_var": false,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Название сервера"
+                },
+                "es": {
+                  "info": "Nombre del servidor"
+                },
+                "de": {
+                  "info": "Servername"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -1549,7 +2229,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             },
             {
               "var": "autosave_interval",
@@ -1560,7 +2250,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Интервал автосохранения (мин)"
+                },
+                "es": {
+                  "info": "Intervalo de autoguardado (minutos)"
+                },
+                "de": {
+                  "info": "Autosave-Intervall (Minuten)"
+                }
+              }
             },
             {
               "var": "visibility",
@@ -1571,7 +2271,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Видимость сервера (public, lan, hidden)"
+                },
+                "es": {
+                  "info": "Visibilidad del servidor (public, lan, hidden)"
+                },
+                "de": {
+                  "info": "Sichtbarkeit des Servers (public, lan, hidden)"
+                }
+              }
             },
             {
               "var": "seed",
@@ -1582,7 +2292,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Сид генерации карты"
+                },
+                "es": {
+                  "info": "Semilla de generación del mapa"
+                },
+                "de": {
+                  "info": "Seed für die Kartengenerierung"
+                }
+              }
             },
             {
               "var": "tags",
@@ -1593,7 +2313,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Теги для поиска сервера"
+                },
+                "es": {
+                  "info": "Etiquetas para facilitar la búsqueda"
+                },
+                "de": {
+                  "info": "Tags für die Serversuche"
+                }
+              }
             }
           ],
           "remote_repository_linux": "https://cdn.gameap.com/factorio/factorio-headless_linux_2.1.12.tar.xz",
@@ -1617,13 +2347,23 @@
             {
               "var": "name",
               "default": "GameAP Factorio Server",
-              "info": "Server Name",
+              "info": "Server name",
               "admin_var": false,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Название сервера"
+                },
+                "es": {
+                  "info": "Nombre del servidor"
+                },
+                "de": {
+                  "info": "Servername"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -1634,7 +2374,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             },
             {
               "var": "autosave_interval",
@@ -1645,7 +2395,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Интервал автосохранения (мин)"
+                },
+                "es": {
+                  "info": "Intervalo de autoguardado (minutos)"
+                },
+                "de": {
+                  "info": "Autosave-Intervall (Minuten)"
+                }
+              }
             },
             {
               "var": "visibility",
@@ -1656,7 +2416,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Видимость сервера (public, lan, hidden)"
+                },
+                "es": {
+                  "info": "Visibilidad del servidor (public, lan, hidden)"
+                },
+                "de": {
+                  "info": "Sichtbarkeit des Servers (public, lan, hidden)"
+                }
+              }
             },
             {
               "var": "seed",
@@ -1667,7 +2437,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Сид генерации карты"
+                },
+                "es": {
+                  "info": "Semilla de generación del mapa"
+                },
+                "de": {
+                  "info": "Seed für die Kartengenerierung"
+                }
+              }
             },
             {
               "var": "tags",
@@ -1678,7 +2458,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Теги для поиска сервера"
+                },
+                "es": {
+                  "info": "Etiquetas para facilitar la búsqueda"
+                },
+                "de": {
+                  "info": "Tags für die Serversuche"
+                }
+              }
             }
           ],
           "remote_repository_linux": "https://cdn.gameap.com/factorio/factorio-headless_linux_2.0.77.tar.xz",
@@ -1716,13 +2506,23 @@
             {
               "var": "hostname",
               "default": "GameAP FiveM Server",
-              "info": "Server Hostname",
+              "info": "Server name",
               "admin_var": false,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Название сервера"
+                },
+                "es": {
+                  "info": "Nombre del servidor"
+                },
+                "de": {
+                  "info": "Servername"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -1733,7 +2533,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             },
             {
               "var": "license_key",
@@ -1744,7 +2554,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Лицензионный ключ с https://keymaster.fivem.net"
+                },
+                "es": {
+                  "info": "Clave de licencia de https://keymaster.fivem.net"
+                },
+                "de": {
+                  "info": "Lizenzschlüssel von https://keymaster.fivem.net"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -1781,19 +2601,39 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "gm_flatgrass",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -1802,7 +2642,17 @@
                 "gm_construct",
                 "gm_flatgrass"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -1813,7 +2663,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             },
             {
               "var": "tickrate",
@@ -1824,7 +2684,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Тикрейт"
+                },
+                "es": {
+                  "info": "Tickrate"
+                },
+                "de": {
+                  "info": "Tickrate"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -1868,7 +2738,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Память: максимальный размер кучи (Xmx)"
+                },
+                "es": {
+                  "info": "Memoria. Tamaño máximo del heap (Xmx)"
+                },
+                "de": {
+                  "info": "Arbeitsspeicher. Max. Heap-Größe (Xmx)"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -1905,19 +2785,39 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "dm_lockdown",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -1932,7 +2832,17 @@
                 "dm_underpass",
                 "halls3"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -1943,7 +2853,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -1981,13 +2901,23 @@
             {
               "var": "hostname",
               "default": "GameAP Hurtworld Server",
-              "info": "Server Hostname",
+              "info": "Server name",
               "admin_var": false,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Название сервера"
+                },
+                "es": {
+                  "info": "Nombre del servidor"
+                },
+                "de": {
+                  "info": "Servername"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -1998,7 +2928,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -2067,19 +3007,39 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "l4d_hospital01_apartment",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -2190,7 +3150,17 @@
                   "label": "The Last Stand - l4d_sv_lighthouse"
                 }
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -2227,19 +3197,39 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "c2m1_highway",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -2474,7 +3464,17 @@
                   "label": "The Last Stand - c14m2_lighthouse"
                 }
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -2511,32 +3511,92 @@
             {
               "info": "Ban List",
               "command": "banlist players",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Список банов"
+                },
+                "es": {
+                  "info": "Lista de baneados"
+                },
+                "de": {
+                  "info": "Bannliste"
+                }
+              }
             },
             {
               "info": "Save World",
               "command": "save-all",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Сохранить мир"
+                },
+                "es": {
+                  "info": "Guardar mundo"
+                },
+                "de": {
+                  "info": "Welt speichern"
+                }
+              }
             },
             {
               "info": "Set Day",
               "command": "time set day",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Установить день"
+                },
+                "es": {
+                  "info": "Poner de día"
+                },
+                "de": {
+                  "info": "Tag einstellen"
+                }
+              }
             },
             {
               "info": "Set Night",
               "command": "time set night",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Установить ночь"
+                },
+                "es": {
+                  "info": "Poner de noche"
+                },
+                "de": {
+                  "info": "Nacht einstellen"
+                }
+              }
             },
             {
               "info": "Weather Clear",
               "command": "weather clear",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Установить ясную погоду"
+                },
+                "es": {
+                  "info": "Poner el clima despejado"
+                },
+                "de": {
+                  "info": "Klares Wetter einstellen"
+                }
+              }
             },
             {
               "info": "Seed",
               "command": "seed",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Сид мира"
+                },
+                "es": {
+                  "info": "Semilla del mundo (seed)"
+                },
+                "de": {
+                  "info": "Welt-Seed"
+                }
+              }
             }
           ],
           "vars": [
@@ -2652,12 +3712,22 @@
                 "1.1",
                 "1.0"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Версия Minecraft"
+                },
+                "es": {
+                  "info": "Versión de Minecraft"
+                },
+                "de": {
+                  "info": "Minecraft-Version"
+                }
+              }
             },
             {
               "var": "mod",
               "default": "vanilla",
-              "info": "Mod",
+              "info": "Server software",
               "admin_var": true,
               "type": "select",
               "description": "",
@@ -2704,18 +3774,38 @@
                   "label": "BungeeCord"
                 }
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Ядро сервера"
+                },
+                "es": {
+                  "info": "Software del servidor"
+                },
+                "de": {
+                  "info": "Serversoftware"
+                }
+              }
             },
             {
               "var": "mod_version",
               "default": "",
-              "info": "Mod version",
+              "info": "Server software version",
               "admin_var": true,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Версия ядра"
+                },
+                "es": {
+                  "info": "Versión del software"
+                },
+                "de": {
+                  "info": "Version der Serversoftware"
+                }
+              }
             },
             {
               "var": "memory",
@@ -2726,7 +3816,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Память: максимальный размер кучи (Xmx)"
+                },
+                "es": {
+                  "info": "Memoria. Tamaño máximo del heap (Xmx)"
+                },
+                "de": {
+                  "info": "Arbeitsspeicher. Max. Heap-Größe (Xmx)"
+                }
+              }
             },
             {
               "var": "min_memory",
@@ -2737,7 +3837,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Память: начальный размер кучи (Xms)"
+                },
+                "es": {
+                  "info": "Memoria mínima. Tamaño inicial del heap (Xms)"
+                },
+                "de": {
+                  "info": "Min. Arbeitsspeicher. Initiale Heap-Größe (Xms)"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -2759,35 +3869,173 @@
       "start_code": "mta",
       "name": "GTA: Multi Theft Auto",
       "engine": "mta",
-      "engine_version": "1.0",
+      "engine_version": "1.6",
       "steam_app_id_linux": 0,
       "steam_app_id_windows": 0,
       "steam_app_set_config": "",
-      "remote_repository_linux": "https://cdn.gameap.com/mta/mta.tar.xz",
-      "remote_repository_windows": "",
+      "remote_repository_linux": "https://cdn.gameap.com/mta/run.sh.tar.gz",
+      "remote_repository_windows": "https://cdn.gameap.com/mta/run.ps1.zip",
       "mods": [
         {
-          "id": 12,
+          "id": 0,
           "game_code": "mta",
-          "name": "DeathMatch Default",
+          "name": "Deathmatch",
           "fast_rcon": [],
           "vars": [
             {
+              "var": "version",
+              "default": "1.6.0",
+              "info": "Server version",
+              "admin_var": true,
+              "type": "select",
+              "description": "Stable release X.Y.Z, or a nightly build such as 1.6.0-rc-24144 (Linux only). Changing the value re-downloads the server binaries on the next start; the configuration and the resources are kept.",
+              "allow_custom": true,
+              "options": [
+                {
+                  "value": "1.6.0",
+                  "label": "1.6.0 (stable)",
+                  "i18n": {
+                    "ru": {
+                      "label": "1.6.0 (стабильная)"
+                    },
+                    "es": {
+                      "label": "1.6.0 (estable)"
+                    },
+                    "de": {
+                      "label": "1.6.0 (stabil)"
+                    }
+                  }
+                }
+              ],
+              "rules": {
+                "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-(rc|untested)-[0-9]+)?$"
+              },
+              "i18n": {
+                "ru": {
+                  "info": "Версия сервера",
+                  "description": "Стабильный релиз X.Y.Z или nightly-сборка вида 1.6.0-rc-24144 (только Linux). После смены значения бинарные файлы сервера скачиваются заново при следующем запуске; конфигурация и ресурсы сохраняются."
+                },
+                "es": {
+                  "info": "Versión del servidor",
+                  "description": "Versión estable X.Y.Z o una compilación nightly como 1.6.0-rc-24144 (solo Linux). Al cambiar el valor, los binarios del servidor se vuelven a descargar en el siguiente inicio; la configuración y los recursos se conservan."
+                },
+                "de": {
+                  "info": "Serverversion",
+                  "description": "Stabile Version X.Y.Z oder ein Nightly-Build wie 1.6.0-rc-24144 (nur Linux). Nach einer Änderung werden die Server-Binärdateien beim nächsten Start neu heruntergeladen; Konfiguration und Ressourcen bleiben erhalten."
+                }
+              }
+            },
+            {
+              "var": "name",
+              "default": "GameAP MTA Server",
+              "info": "Server name",
+              "admin_var": false,
+              "type": "string",
+              "description": "Shown in the server browser (servername in mtaserver.conf).",
+              "allow_custom": false,
+              "options": null,
+              "rules": {
+                "min_length": 1,
+                "max_length": 128
+              },
+              "i18n": {
+                "ru": {
+                  "info": "Название сервера",
+                  "description": "Отображается в списке серверов (servername в mtaserver.conf)."
+                },
+                "es": {
+                  "info": "Nombre del servidor",
+                  "description": "Se muestra en la lista de servidores (servername en mtaserver.conf)."
+                },
+                "de": {
+                  "info": "Servername",
+                  "description": "Wird im Serverbrowser angezeigt (servername in mtaserver.conf)."
+                }
+              }
+            },
+            {
               "var": "maxplayers",
               "default": "32",
-              "info": "Maximum players on server",
+              "info": "Maximum players",
               "admin_var": true,
-              "type": "",
+              "type": "int",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "rules": {
+                "min": 1,
+                "max": 4096
+              },
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
+            },
+            {
+              "var": "password",
+              "default": "",
+              "info": "Join password",
+              "admin_var": false,
+              "type": "password",
+              "description": "Leave empty for a server without a password.",
+              "allow_custom": false,
+              "options": null,
+              "rules": {
+                "max_length": 32
+              },
+              "i18n": {
+                "ru": {
+                  "info": "Пароль для входа",
+                  "description": "Оставьте пустым, если пароль не нужен."
+                },
+                "es": {
+                  "info": "Contraseña de acceso",
+                  "description": "Dejar vacío para un servidor sin contraseña."
+                },
+                "de": {
+                  "info": "Zugangspasswort",
+                  "description": "Leer lassen für einen Server ohne Passwort."
+                }
+              }
+            },
+            {
+              "var": "ase",
+              "default": "1",
+              "info": "List in the server browser (ASE)",
+              "admin_var": false,
+              "type": "bool",
+              "description": "Announces the server to the master list; uses one extra UDP port (game port + 123).",
+              "allow_custom": false,
+              "options": null,
+              "true_value": "1",
+              "false_value": "0",
+              "i18n": {
+                "ru": {
+                  "info": "Показывать в списке серверов (ASE)",
+                  "description": "Добавляет сервер в мастер-лист; занимает дополнительный UDP-порт (игровой порт + 123)."
+                },
+                "es": {
+                  "info": "Mostrar en la lista de servidores (ASE)",
+                  "description": "Anuncia el servidor en la lista maestra; usa un puerto UDP adicional (puerto del juego + 123)."
+                },
+                "de": {
+                  "info": "Im Serverbrowser anzeigen (ASE)",
+                  "description": "Meldet den Server an die Masterliste; belegt einen zusätzlichen UDP-Port (Spielport + 123)."
+                }
+              }
             }
           ],
-          "remote_repository_linux": "https://cdn.gameap.com/mta/default-deathmatch.tar.xz",
+          "remote_repository_linux": "",
           "remote_repository_windows": "",
-          "start_cmd_linux": "./mta-server64 -t -n --ip {ip} --port {port} --maxplayers {maxplayers}",
-          "start_cmd_windows": "mta-server.exe -t -n --ip {ip} --port {port} --maxplayers {maxplayers}",
+          "start_cmd_linux": "./run.sh --version={version} --ip={ip} --port={port} --http-port={rcon_port} --maxplayers={maxplayers} --name=\"{name}\" --password=\"{password}\" --ase={ase}",
+          "start_cmd_windows": "powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -File run.ps1 --version={version} --ip={ip} --port={port} --http-port={rcon_port} --maxplayers={maxplayers} --name=\"{name}\" --password=\"{password}\" --ase={ase}",
           "kick_cmd": "",
           "ban_cmd": "",
           "chname_cmd": "",
@@ -2818,19 +4066,39 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "op4_bootcamp",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -2862,18 +4130,38 @@
                 "op4ctf_wonderland",
                 "op4ctf_xendance"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "fps",
               "default": "500",
-              "info": "Server FPS (tickrate)",
+              "info": "Server FPS (sys_ticrate)",
               "admin_var": true,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "FPS сервера (sys_ticrate)"
+                },
+                "es": {
+                  "info": "FPS del servidor (sys_ticrate)"
+                },
+                "de": {
+                  "info": "Server-FPS (sys_ticrate)"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -2884,7 +4172,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -2922,13 +4220,23 @@
             {
               "var": "hostname",
               "default": "Quake 2 Server",
-              "info": "Server Hostname",
+              "info": "Server name",
               "admin_var": false,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Название сервера"
+                },
+                "es": {
+                  "info": "Nombre del servidor"
+                },
+                "de": {
+                  "info": "Servername"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -2939,12 +4247,22 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             },
             {
               "var": "map",
               "default": "q2dm1",
-              "info": "Map of the server",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -2983,7 +4301,17 @@
                   "label": "q2dm8 - Warehouse"
                 }
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "timelimit",
@@ -2994,7 +4322,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Лимит времени (мин)"
+                },
+                "es": {
+                  "info": "Límite de tiempo (minutos)"
+                },
+                "de": {
+                  "info": "Zeitlimit (Minuten)"
+                }
+              }
             },
             {
               "var": "fraglimit",
@@ -3005,7 +4343,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Лимит фрагов"
+                },
+                "es": {
+                  "info": "Límite de frags"
+                },
+                "de": {
+                  "info": "Fraglimit"
+                }
+              }
             },
             {
               "var": "game",
@@ -3016,7 +4364,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Дополнение или мод (game)"
+                },
+                "es": {
+                  "info": "Mod o pack de misiones (game)"
+                },
+                "de": {
+                  "info": "Mission Pack oder Mod (game)"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -3054,13 +4412,23 @@
             {
               "var": "hostname",
               "default": "Quake 3 Server",
-              "info": "Server Hostname",
+              "info": "Server name",
               "admin_var": false,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Название сервера"
+                },
+                "es": {
+                  "info": "Nombre del servidor"
+                },
+                "de": {
+                  "info": "Servername"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -3071,12 +4439,22 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             },
             {
               "var": "map",
               "default": "q3dm17",
-              "info": "Default map of the server",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -3208,7 +4586,17 @@
                 "pro-q3tourney2",
                 "pro-q3tourney4"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "timelimit",
@@ -3219,7 +4607,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Лимит времени (мин)"
+                },
+                "es": {
+                  "info": "Límite de tiempo (minutos)"
+                },
+                "de": {
+                  "info": "Zeitlimit (Minuten)"
+                }
+              }
             },
             {
               "var": "fraglimit",
@@ -3230,7 +4628,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Лимит фрагов"
+                },
+                "es": {
+                  "info": "Límite de frags"
+                },
+                "de": {
+                  "info": "Fraglimit"
+                }
+              }
             }
           ],
           "remote_repository_linux": "https://cdn.gameap.com/quake/ioquake3-linux-amd64.tar.gz",
@@ -3254,13 +4662,23 @@
             {
               "var": "hostname",
               "default": "Quake 3 Server",
-              "info": "Server Hostname",
+              "info": "Server name",
               "admin_var": false,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Название сервера"
+                },
+                "es": {
+                  "info": "Nombre del servidor"
+                },
+                "de": {
+                  "info": "Servername"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -3271,12 +4689,22 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             },
             {
               "var": "map",
               "default": "q3dm17",
-              "info": "Default map of the server",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -3408,7 +4836,17 @@
                 "pro-q3tourney2",
                 "pro-q3tourney4"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "timelimit",
@@ -3419,7 +4857,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Лимит времени (мин)"
+                },
+                "es": {
+                  "info": "Límite de tiempo (minutos)"
+                },
+                "de": {
+                  "info": "Zeitlimit (Minuten)"
+                }
+              }
             },
             {
               "var": "fraglimit",
@@ -3430,7 +4878,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Лимит фрагов"
+                },
+                "es": {
+                  "info": "Límite de frags"
+                },
+                "de": {
+                  "info": "Fraglimit"
+                }
+              }
             }
           ],
           "remote_repository_linux": "https://cdn.gameap.com/quake/quake3e-linux.tar.gz",
@@ -3467,19 +4925,39 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "rc_arena",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -3489,18 +4967,38 @@
                 "rc_deathmatch",
                 "rc_deathmatch2"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "fps",
               "default": "500",
-              "info": "Server FPS (tickrate)",
+              "info": "Server FPS (sys_ticrate)",
               "admin_var": true,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "FPS сервера (sys_ticrate)"
+                },
+                "es": {
+                  "info": "FPS del servidor (sys_ticrate)"
+                },
+                "de": {
+                  "info": "Server-FPS (sys_ticrate)"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -3511,7 +5009,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -3562,13 +5070,23 @@
             {
               "var": "hostname",
               "default": "GameAP Rust server",
-              "info": "Server Hostname",
+              "info": "Server name",
               "admin_var": false,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Название сервера"
+                },
+                "es": {
+                  "info": "Nombre del servidor"
+                },
+                "de": {
+                  "info": "Servername"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -3579,7 +5097,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             },
             {
               "var": "level",
@@ -3590,7 +5118,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта сервера"
+                },
+                "es": {
+                  "info": "Mapa del servidor"
+                },
+                "de": {
+                  "info": "Karte"
+                }
+              }
             },
             {
               "var": "level_seed",
@@ -3601,7 +5139,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Сид генерации карты"
+                },
+                "es": {
+                  "info": "Semilla de generación del mapa"
+                },
+                "de": {
+                  "info": "Seed für die Kartengenerierung"
+                }
+              }
             },
             {
               "var": "world_size",
@@ -3612,18 +5160,38 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Размер карты"
+                },
+                "es": {
+                  "info": "Tamaño del mapa"
+                },
+                "de": {
+                  "info": "Kartengröße"
+                }
+              }
             },
             {
               "var": "saveinterval",
               "default": "300",
-              "info": "Server save interval",
+              "info": "Server save interval in seconds",
               "admin_var": true,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Интервал автосохранения (сек)"
+                },
+                "es": {
+                  "info": "Intervalo de autoguardado (segundos)"
+                },
+                "de": {
+                  "info": "Autosave-Intervall (Sekunden)"
+                }
+              }
             }
           ],
           "remote_repository_linux": "https://cdn.gameap.com/rust/default_linux.tar.gz",
@@ -3647,13 +5215,23 @@
             {
               "var": "hostname",
               "default": "GameAP Rust server",
-              "info": "Server Hostname",
+              "info": "Server name",
               "admin_var": false,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Название сервера"
+                },
+                "es": {
+                  "info": "Nombre del servidor"
+                },
+                "de": {
+                  "info": "Servername"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -3664,7 +5242,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             },
             {
               "var": "level",
@@ -3675,7 +5263,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта сервера"
+                },
+                "es": {
+                  "info": "Mapa del servidor"
+                },
+                "de": {
+                  "info": "Karte"
+                }
+              }
             },
             {
               "var": "level_seed",
@@ -3686,7 +5284,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Сид генерации карты"
+                },
+                "es": {
+                  "info": "Semilla de generación del mapa"
+                },
+                "de": {
+                  "info": "Seed für die Kartengenerierung"
+                }
+              }
             },
             {
               "var": "world_size",
@@ -3697,18 +5305,38 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Размер карты"
+                },
+                "es": {
+                  "info": "Tamaño del mapa"
+                },
+                "de": {
+                  "info": "Kartengröße"
+                }
+              }
             },
             {
               "var": "saveinterval",
               "default": "300",
-              "info": "Server save interval",
+              "info": "Server save interval in seconds",
               "admin_var": true,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Интервал автосохранения (сек)"
+                },
+                "es": {
+                  "info": "Intervalo de autoguardado (segundos)"
+                },
+                "de": {
+                  "info": "Autosave-Intervall (Sekunden)"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -3745,30 +5373,70 @@
             {
               "info": "Commands List",
               "command": "cmdlist",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Список команд"
+                },
+                "es": {
+                  "info": "Lista de comandos"
+                },
+                "de": {
+                  "info": "Befehlsliste"
+                }
+              }
             },
             {
               "info": "Variables List",
               "command": "varlist",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Список переменных"
+                },
+                "es": {
+                  "info": "Lista de variables"
+                },
+                "de": {
+                  "info": "Variablenliste"
+                }
+              }
             },
             {
               "info": "Version",
               "command": "version",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Версия сервера"
+                },
+                "es": {
+                  "info": "Versión del servidor"
+                },
+                "de": {
+                  "info": "Version"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "hostname",
               "default": "SA-MP 0.3 Server",
-              "info": "Server Hostname",
+              "info": "Server name",
               "admin_var": false,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Название сервера"
+                },
+                "es": {
+                  "info": "Nombre del servidor"
+                },
+                "de": {
+                  "info": "Servername"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -3779,7 +5447,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -3816,19 +5494,39 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "svencoop1",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -3877,7 +5575,17 @@
                 "uplink",
                 "yabma"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -3888,7 +5596,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -3925,19 +5643,39 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "d1_trainstation_01",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -3963,7 +5701,17 @@
                 "syn_silent_house",
                 "syn_takeover"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -3974,7 +5722,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -4011,12 +5769,32 @@
             {
               "info": "Help. List all commands",
               "command": "help",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Справка. Список всех команд"
+                },
+                "es": {
+                  "info": "Ayuda. Lista de todos los comandos"
+                },
+                "de": {
+                  "info": "Hilfe. Alle Befehle auflisten"
+                }
+              }
             },
             {
               "info": "Channel List",
               "command": "channellist",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Список каналов"
+                },
+                "es": {
+                  "info": "Lista de canales"
+                },
+                "de": {
+                  "info": "Kanalliste"
+                }
+              }
             }
           ],
           "vars": [
@@ -4029,7 +5807,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Порт передачи файлов"
+                },
+                "es": {
+                  "info": "Puerto de transferencia de archivos"
+                },
+                "de": {
+                  "info": "Dateitransfer-Port"
+                }
+              }
             }
           ],
           "remote_repository_linux": "https://cdn.gameap.com/teamspeak3/teamspeak-runner.tar.gz",
@@ -4066,19 +5854,39 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "pl_goldrush",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -4171,7 +5979,17 @@
                 "sd_doomsday",
                 "tc_hydro"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -4182,7 +6000,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             },
             {
               "var": "server_token",
@@ -4193,7 +6021,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Токен сервера (sv_setsteamaccount)"
+                },
+                "es": {
+                  "info": "Token del servidor (sv_setsteamaccount)"
+                },
+                "de": {
+                  "info": "Server-Token (sv_setsteamaccount)"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -4230,19 +6068,39 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "2fort",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -4264,18 +6122,38 @@
                 "warpath",
                 "well"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "fps",
               "default": "500",
-              "info": "Server FPS (tickrate)",
+              "info": "Server FPS (sys_ticrate)",
               "admin_var": true,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "FPS сервера (sys_ticrate)"
+                },
+                "es": {
+                  "info": "FPS del servidor (sys_ticrate)"
+                },
+                "de": {
+                  "info": "Server-FPS (sys_ticrate)"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -4286,7 +6164,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -4324,13 +6212,23 @@
             {
               "var": "hostname",
               "default": "GameAP The Forest Server",
-              "info": "Server Hostname",
+              "info": "Server name",
               "admin_var": false,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Название сервера"
+                },
+                "es": {
+                  "info": "Nombre del servidor"
+                },
+                "de": {
+                  "info": "Servername"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -4341,7 +6239,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
@@ -4379,24 +6287,44 @@
             {
               "var": "word",
               "default": "Dedicated",
-              "info": "Default Word",
+              "info": "World name",
               "admin_var": false,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Название мира"
+                },
+                "es": {
+                  "info": "Nombre del mundo"
+                },
+                "de": {
+                  "info": "Weltname"
+                }
+              }
             },
             {
               "var": "hostname",
               "default": "GameAP Valheim Server",
-              "info": "Server Hostname",
+              "info": "Server name",
               "admin_var": false,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Название сервера"
+                },
+                "es": {
+                  "info": "Nombre del servidor"
+                },
+                "de": {
+                  "info": "Servername"
+                }
+              }
             }
           ],
           "remote_repository_linux": "https://cdn.gameap.com/valheim/default_linux.tar.gz",
@@ -4433,29 +6361,69 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             },
             {
-              "info": "Last disconnect players",
+              "info": "Recently disconnected players",
               "command": "amx_last",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Последние отключившиеся игроки"
+                },
+                "es": {
+                  "info": "Jugadores desconectados recientemente"
+                },
+                "de": {
+                  "info": "Zuletzt getrennte Spieler"
+                }
+              }
             },
             {
-              "info": "Admins on servers",
+              "info": "Admins on the server",
               "command": "amx_who",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Админы на сервере"
+                },
+                "es": {
+                  "info": "Administradores conectados"
+                },
+                "de": {
+                  "info": "Admins auf dem Server"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "crossfire",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -4474,18 +6442,38 @@
                 "subtransit",
                 "undertow"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "fps",
               "default": "500",
-              "info": "Server FPS (tickrate)",
+              "info": "Server FPS (sys_ticrate)",
               "admin_var": true,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "FPS сервера (sys_ticrate)"
+                },
+                "es": {
+                  "info": "FPS del servidor (sys_ticrate)"
+                },
+                "de": {
+                  "info": "Server-FPS (sys_ticrate)"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -4496,7 +6484,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             }
           ],
           "remote_repository_linux": "https://cdn.gameap.com/half-life/amxx.tar.xz",
@@ -4519,19 +6517,39 @@
             {
               "info": "Status",
               "command": "status",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Статус"
+                },
+                "es": {
+                  "info": "Estado del servidor"
+                },
+                "de": {
+                  "info": "Status"
+                }
+              }
             },
             {
               "info": "Stats",
               "command": "stats",
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Нагрузка сервера"
+                },
+                "es": {
+                  "info": "Estadísticas de rendimiento"
+                },
+                "de": {
+                  "info": "Serverauslastung"
+                }
+              }
             }
           ],
           "vars": [
             {
               "var": "default_map",
               "default": "crossfire",
-              "info": "Default Map",
+              "info": "Default map",
               "admin_var": false,
               "type": "select",
               "description": "",
@@ -4550,18 +6568,38 @@
                 "subtransit",
                 "undertow"
               ],
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Карта по умолчанию"
+                },
+                "es": {
+                  "info": "Mapa predeterminado"
+                },
+                "de": {
+                  "info": "Standardkarte"
+                }
+              }
             },
             {
               "var": "fps",
               "default": "500",
-              "info": "Server FPS (tickrate)",
+              "info": "Server FPS (sys_ticrate)",
               "admin_var": true,
               "type": "",
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "FPS сервера (sys_ticrate)"
+                },
+                "es": {
+                  "info": "FPS del servidor (sys_ticrate)"
+                },
+                "de": {
+                  "info": "Server-FPS (sys_ticrate)"
+                }
+              }
             },
             {
               "var": "maxplayers",
@@ -4572,7 +6610,17 @@
               "description": "",
               "allow_custom": false,
               "options": null,
-              "i18n": null
+              "i18n": {
+                "ru": {
+                  "info": "Максимум игроков на сервере"
+                },
+                "es": {
+                  "info": "Máximo de jugadores"
+                },
+                "de": {
+                  "info": "Maximale Spielerzahl"
+                }
+              }
             }
           ],
           "remote_repository_linux": "",
