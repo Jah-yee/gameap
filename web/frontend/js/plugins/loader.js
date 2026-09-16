@@ -48,7 +48,32 @@ async function loadPluginStyles() {
     }
 }
 
-export async function loadPlugins(router) {
+// app.js loads plugins for a restored session, and SsoView loads them again
+// after redeeming a ticket — which also runs while that restored session is
+// still active. The store appends every menu item, slot component and editor
+// it is given, so a second pass rendered each of them twice and re-ran every
+// onInit. The bundle is the same for every account, so later callers share
+// the first load. Only a load that could not fetch or evaluate the bundle is
+// forgotten and retried by the next caller: a definition that fails to
+// register would fail the same way again and could repeat what it registered
+// before throwing.
+let pluginsLoad = null
+
+export function loadPlugins(router) {
+    if (!pluginsLoad) {
+        pluginsLoad = fetchAndRegisterPlugins(router).then((registered) => {
+            if (!registered) {
+                pluginsLoad = null
+            }
+        })
+    }
+
+    return pluginsLoad
+}
+
+// Resolves to false when the bundle could not be fetched or evaluated, which
+// always happens before anything is registered.
+async function fetchAndRegisterPlugins(router) {
     const pluginsStore = usePluginsStore()
 
     pluginsStore.setLoading(true)
@@ -70,7 +95,8 @@ export async function loadPlugins(router) {
 
         if (!moduleText || moduleText.trim() === '') {
             console.log('No plugins to load')
-            return
+
+            return true
         }
 
         const blob = new Blob([moduleText], { type: 'application/javascript' })
@@ -103,18 +129,22 @@ export async function loadPlugins(router) {
 
         pluginsStore.registerRoutes(router)
 
+        return true
     } catch (error) {
         if (error.response?.status === 404) {
             console.log('No plugins endpoint available')
-            return
+
+            return true
         }
 
         if (error.__CANCEL__) {
-            return
+            return false
         }
 
         console.error('Plugin loader error:', error)
         pluginsStore.addLoadError(error.message)
+
+        return false
     } finally {
         pluginsStore.setLoading(false)
         pluginsStore.setInitialized(true)
