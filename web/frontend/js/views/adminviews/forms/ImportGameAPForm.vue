@@ -9,7 +9,7 @@
         label-width="auto"
         ref="formRef"
     >
-      <n-form-item :label="trans('games.gameap_yaml_file')">
+      <n-form-item :label="trans('games.gameap_yaml_file')" :show-feedback="false">
         <n-upload
             accept=".yaml,.yml"
             :max="1"
@@ -32,6 +32,8 @@
           </n-upload-dragger>
         </n-upload>
       </n-form-item>
+
+      <HubHint :text="trans('hub.hint_import')" class="mt-2 mb-4" />
 
       <div v-if="errorMessage" class="mb-4 p-3 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 rounded">
         {{ errorMessage }}
@@ -84,6 +86,7 @@ import { ref } from "vue"
 import { trans } from "@/i18n/i18n"
 import GButton from "@/components/GButton.vue"
 import GFixedBottomBar from "@/components/GFixedBottomBar.vue"
+import HubHint from "@/components/hub/HubHint.vue"
 import {
   NForm,
   NFormItem,
