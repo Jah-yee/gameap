@@ -38,10 +38,17 @@ function fileEntry(path: string) {
 
 const menu = (page: Page) => page.locator('.fm-context-menu');
 
+const fileRow = (page: Page, name: string) =>
+  page.locator('.fm-row--file', { hasText: name });
+
 // The popover fades the menu in from `scale(.85)`, and a transformed box
 // measures short, so every size assertion waits the enter transition out.
-async function openMenuOn(page: Page, row: ReturnType<typeof fileRow>) {
-  await row.first().click({ button: 'right' });
+async function openMenuOn(
+  page: Page,
+  row: ReturnType<typeof fileRow>,
+  position?: { x: number; y: number },
+) {
+  await row.first().click({ button: 'right', ...(position ? { position } : {}) });
   await expect(menu(page)).toBeVisible();
   await page.waitForFunction(() => {
     const el = document.querySelector('.fm-context-menu')?.closest('.n-popover');
@@ -51,8 +58,6 @@ async function openMenuOn(page: Page, row: ReturnType<typeof fileRow>) {
     return style.opacity === '1' && /^(none|matrix\(1, 0, 0, 1, 0, 0\))$/.test(style.transform);
   });
 }
-const fileRow = (page: Page, name: string) =>
-  page.locator('.fm-row--file', { hasText: name });
 
 async function openFileManager(page: Page, request: APIRequestContext) {
   const token = await loginViaAPI(request);
@@ -327,13 +332,9 @@ test('a menu opened at the right edge of the list stays on screen', async ({
   test.setTimeout(120_000);
   await openFileManager(page, request);
 
-  const row = fileRow(page, 'file01.txt').first();
-  const box = (await row.boundingBox())!;
-  await row.click({
-    button: 'right',
-    position: { x: box.width - 4, y: box.height / 2 },
-  });
-  await expect(menu(page)).toBeVisible();
+  const row = fileRow(page, 'file01.txt');
+  const box = (await row.first().boundingBox())!;
+  await openMenuOn(page, row, { x: box.width - 4, y: box.height / 2 });
   await expectEveryItemReachable(page);
   await expectInsideViewport(page);
 });
