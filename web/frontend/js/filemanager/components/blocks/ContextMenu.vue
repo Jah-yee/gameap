@@ -1,36 +1,49 @@
 <template>
-    <div
-        ref="contextMenu"
-        v-if="menuVisible"
-        v-bind:style="menuStyle"
-        v-on:blur="closeMenu"
-        class="fm-context-menu"
-        tabindex="-1"
+    <!-- Manual x/y placement keeps the menu under the cursor, and the popover
+         teleports it out of `.fm-body` and the tab pane, both of which clip
+         with `overflow: hidden`, and flips it when it does not fit below. -->
+    <n-popover
+        trigger="manual"
+        placement="bottom-start"
+        raw
+        v-bind:show="menuVisible"
+        v-bind:x="menuX"
+        v-bind:y="menuY"
+        v-bind:show-arrow="false"
     >
-        <template v-for="block in menuBlocks" v-bind:key="`g-${block.group}`">
-            <ul v-if="block.rows.length" class="list-unstyled">
-                <template v-for="row in block.rows" v-bind:key="row.key">
-                    <li v-if="row.item" v-on:click="menuAction(row.item.name)">
-                        <span class="fm-context-menu-icon"><GIcon :name="row.item.icon" :class="row.item.iconClass" /></span>
-                        {{ lang.contextMenu[row.item.name] }}
-                    </li>
-                    <li
-                        v-else
-                        :class="{ disabled: row.editorItem.disabled }"
-                        :title="row.editorItem.disabled ? lang.contextMenu.fileTooLarge : ''"
-                        @click="!row.editorItem.disabled && openPluginEditor(row.editorItem)"
-                    >
-                        <span class="fm-context-menu-icon"><GIcon :name="row.editorItem.editor.icon || 'edit'" /></span>
-                        {{ getEditorMenuLabel(row.editorItem) }}
-                    </li>
-                </template>
-            </ul>
-        </template>
-    </div>
+        <div
+            v-bind:ref="bindMenu"
+            v-bind:style="{ maxHeight: menuMaxHeight }"
+            v-on:blur="closeMenu"
+            v-on:keydown.esc.stop.prevent="closeMenu"
+            class="fm-context-menu"
+            tabindex="-1"
+        >
+            <template v-for="block in menuBlocks" v-bind:key="`g-${block.group}`">
+                <ul v-if="block.rows.length" class="list-unstyled">
+                    <template v-for="row in block.rows" v-bind:key="row.key">
+                        <li v-if="row.item" v-on:click="menuAction(row.item.name)">
+                            <span class="fm-context-menu-icon"><GIcon :name="row.item.icon" :class="row.item.iconClass" /></span>
+                            {{ lang.contextMenu[row.item.name] }}
+                        </li>
+                        <li
+                            v-else
+                            :class="{ disabled: row.editorItem.disabled }"
+                            :title="row.editorItem.disabled ? lang.contextMenu.fileTooLarge : ''"
+                            @click="!row.editorItem.disabled && openPluginEditor(row.editorItem)"
+                        >
+                            <span class="fm-context-menu-icon"><GIcon :name="row.editorItem.editor.icon || 'edit'" /></span>
+                            {{ getEditorMenuLabel(row.editorItem) }}
+                        </li>
+                    </template>
+                </ul>
+            </template>
+        </div>
+    </n-popover>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, nextTick } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import { GIcon } from '@gameap/ui'
 import EventBus from '../../emitter.js'
 import { isExtractable } from '../../archive.js'
@@ -50,12 +63,14 @@ const history = useHistoryStore()
 const { lang } = useTranslate()
 const { getMatchingEditors } = useFileEditors()
 
+// Breathing room between the menu and the edge of the viewport it is capped to.
+const MENU_VIEWPORT_MARGIN = 8
+
 const contextMenu = ref(null)
 const menuVisible = ref(false)
-const menuStyle = ref({
-    top: 0,
-    left: 0,
-})
+const menuX = ref(0)
+const menuY = ref(0)
+const menuMaxHeight = ref('')
 
 const selectedDisk = computed(() => fm.selectedDisk)
 const selectedItems = computed(() => fm.selectedItems)
@@ -313,39 +328,86 @@ const actions = {
 }
 
 function showMenu(event) {
-    if (selectedItems.value.length) {
-        menuVisible.value = true
+    if (!selectedItems.value.length) return
 
-        nextTick(() => {
-            contextMenu.value?.focus()
-            setMenu(event.pageY, event.pageX)
-        })
+    menuMaxHeight.value = `${document.documentElement.clientHeight - MENU_VIEWPORT_MARGIN * 2}px`
+    menuX.value = event.clientX
+    menuY.value = event.clientY
+    menuVisible.value = true
+}
+
+// The popover hangs the menu off one side of the cursor — below it, or above
+// when that is the roomier side — so a menu taller than either gap would have
+// to scroll even while the screen has room for all of it. Moving the anchor up
+// to the lowest point the whole menu still fits at spends that room instead.
+// Only a menu taller than the screen is left scrolling, capped by maxHeight.
+function fitMenu(el) {
+    const lowest = document.documentElement.clientHeight - MENU_VIEWPORT_MARGIN - el.offsetHeight
+
+    if (menuY.value > lowest) {
+        menuY.value = Math.max(lowest, MENU_VIEWPORT_MARGIN)
     }
 }
 
-function setMenu(top, left) {
-    const el = contextMenu.value?.parentNode
+function settleMenu() {
+    const el = contextMenu.value
     if (!el) return
 
-    const elSize = el.getBoundingClientRect()
-    const elY = window.scrollY + elSize.top
-    const elX = window.scrollX + elSize.left
-
-    let menuY = top - elY
-    let menuX = left - elX
-
-    const maxY = elY + (el.offsetHeight - contextMenu.value.offsetHeight - 25)
-    const maxX = elX + (el.offsetWidth - contextMenu.value.offsetWidth - 25)
-
-    if (top > maxY) menuY = maxY - elY
-    if (left > maxX) menuX = maxX - elX
-
-    menuStyle.value.top = `${menuY}px`
-    menuStyle.value.left = `${menuX}px`
+    // Focusing an element teleported into the body scrolls the page to it.
+    el.focus({ preventScroll: true })
+    fitMenu(el)
+    armScrollClose()
 }
 
+// Closing on blur needs the menu focused, and the popover body is not in the
+// DOM on the tick `menuVisible` flips — so this runs when the element
+// appears...
+function bindMenu(el) {
+    contextMenu.value = el
+    if (el) nextTick(settleMenu)
+}
+
+// ...and again on reopen, for the case where the menu is opened over another
+// row before the closing one has finished leaving and Vue reuses the element.
+watch(menuVisible, (visible) => {
+    if (visible) nextTick(settleMenu)
+})
+
 function closeMenu() {
+    disarmScrollClose()
     menuVisible.value = false
+}
+
+function closeMenuOnScroll(event) {
+    // The popover places the menu in page coordinates, so a scroll of the page
+    // carries it along with the row it was opened on. A scroller inside the
+    // page — the file list above all — moves the rows on their own instead,
+    // and leaves the menu pointing at whatever slid under it.
+    if (event.target === document || event.target === document.scrollingElement) return
+
+    closeMenu()
+}
+
+let scrollCloseFrame = null
+
+// The right click focuses its row, and a row the list keeps partly out of
+// sight is scrolled into view by the browser a beat after the menu is already
+// up. Listening only from the next frame on leaves that scroll to the gesture
+// that opened the menu, and every later one to the reader.
+function armScrollClose() {
+    disarmScrollClose()
+    scrollCloseFrame = requestAnimationFrame(() => {
+        scrollCloseFrame = null
+        window.addEventListener('scroll', closeMenuOnScroll, true)
+    })
+}
+
+function disarmScrollClose() {
+    if (scrollCloseFrame !== null) {
+        cancelAnimationFrame(scrollCloseFrame)
+        scrollCloseFrame = null
+    }
+    window.removeEventListener('scroll', closeMenuOnScroll, true)
 }
 
 function showMenuItem(name) {
@@ -432,16 +494,23 @@ function openPluginEditor(editorItem) {
 
 onMounted(() => {
     EventBus.on('contextMenu', (event) => showMenu(event))
+    window.addEventListener('resize', closeMenu)
+})
+
+onUnmounted(() => {
+    disarmScrollClose()
+    window.removeEventListener('resize', closeMenu)
 })
 </script>
 
 <style lang="scss">
 .fm-context-menu {
-    @apply bg-white dark:bg-stone-900 rounded border shadow-lg;
+    @apply bg-white dark:bg-stone-900 rounded border;
 
-    position: absolute;
-    z-index: 9997;
-    overflow: hidden;
+    // Placement and stacking belong to the popover; the cap comes in inline
+    // from showMenu, and what does not fit under it scrolls.
+    overflow-x: hidden;
+    overflow-y: auto;
 
     &:focus {
         outline: none;
