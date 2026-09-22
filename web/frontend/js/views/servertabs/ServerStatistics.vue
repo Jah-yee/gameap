@@ -21,6 +21,7 @@
                 class="mb-3"
                 header-class="g-card-header"
                 :segmented="{ content: true, footer: 'soft' }"
+                data-testid="server-stats-cpu-chart"
             >
                 <v-chart class="h-72 w-full" :option="cpuOption" :update-options="updateOptions" autoresize />
             </n-card>
@@ -82,6 +83,7 @@ use([
 
 const props = defineProps({
     serverId: { type: Number, required: true },
+    cpuLimitPercent: { type: Number, default: null },
 })
 
 const { chartPalette, statusColors } = useThemeVars()
@@ -114,6 +116,17 @@ const hasAnyData = computed(() => {
     )
 })
 
+
+function lastVal(list) {
+    for (const s of list) {
+        if (s.points && s.points.length) {
+            return s.points[s.points.length - 1].v
+        }
+    }
+
+    return null
+}
+
 function formatBytes(v) {
     if (v == null || Number.isNaN(v)) return ''
     const u = ['B', 'KiB', 'MiB', 'GiB', 'TiB']
@@ -139,7 +152,9 @@ function pointsToData(points) {
     return points.map(p => [p.ts, p.v])
 }
 
-function baseOption({ yMax = null, yFormatter, palette, showLegend = false }) {
+// ySuggestedMax is the lowest top the y axis may have: larger values still
+// grow it, and the result is rounded to a nice tick like any other extent.
+function baseOption({ ySuggestedMax = null, yFormatter, palette, showLegend = false }) {
     return {
         animation: false,
         grid: {
@@ -156,11 +171,12 @@ function baseOption({ yMax = null, yFormatter, palette, showLegend = false }) {
         legend: showLegend ? { type: 'scroll', top: 0 } : { show: false },
         xAxis: {
             type: 'time',
+            axisLabel: { hideOverlap: true },
         },
         yAxis: {
             type: 'value',
             min: 0,
-            max: yMax,
+            dataMax: ySuggestedMax,
             axisLabel: { formatter: yFormatter },
         },
         color: palette,
@@ -179,9 +195,12 @@ function makeLineSeries(name, points, extra = {}) {
     }
 }
 
+// CPU is a percentage of one core, so a multi-core server goes past 100%. The
+// axis spans at least the limit (one core when there is none) and follows the
+// data above it.
 const cpuOption = computed(() => {
     const opt = baseOption({
-        yMax: 100,
+        ySuggestedMax: Number.isFinite(props.cpuLimitPercent) ? props.cpuLimitPercent : 100,
         yFormatter: formatPercent,
         palette: [palettePrimary.value, paletteSuccess.value, paletteWarning.value],
     })
@@ -193,7 +212,6 @@ const cpuOption = computed(() => {
 
 const memoryOption = computed(() => {
     const opt = baseOption({
-        yMax: null,
         yFormatter: formatBytes,
         palette: [palettePrimary.value],
     })
