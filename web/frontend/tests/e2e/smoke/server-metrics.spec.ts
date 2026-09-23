@@ -39,13 +39,18 @@ interface WireSeries {
 
 // One point per sample step, the last one now; counters are sent as running
 // totals, the way the daemon reports them.
-function series(name: string, type: 'gauge' | 'counter', values: number[]): WireSeries {
+function series(
+  name: string,
+  type: 'gauge' | 'counter',
+  values: number[],
+  unit: string = type === 'counter' ? 'bytes' : 'percent',
+): WireSeries {
   const now = Date.now();
 
   return {
     name,
     type,
-    unit: type === 'counter' ? 'bytes' : 'percent',
+    unit,
     labels: { container: 'e2e-metrics-server' },
     points: values.map((v, i) => ({
       timestamp: new Date(now - (values.length - 1 - i) * SAMPLE_STEP_MS).toISOString(),
@@ -241,3 +246,45 @@ test('strip keeps labels and rates whole and the CPU bar visible at tablet width
   expect(barBox).not.toBeNull();
   expect(barBox!.width, 'CPU bar must keep its width').toBeGreaterThan(40);
 });
+
+// A process manager reports only what its platform can measure: a Windows
+// service has no per-process network counters. The chart it never feeds is
+// left out instead of staying empty.
+const CHART_CASES = [
+  { name: 'statistics modal leaves out the network chart without network samples', network: false },
+  { name: 'statistics modal shows the network chart once network samples arrive', network: true },
+];
+
+for (const c of CHART_CASES) {
+  test(c.name, async ({ page, request }) => {
+    test.setTimeout(60_000);
+
+    const token = await loginViaAPI(request);
+    await page.addInitScript((t) => localStorage.setItem('auth_token', t), token);
+
+    const mib = 1024 * 1024;
+    const metrics = [
+      cpuSeries([12, 18, 15]),
+      series('gameap_server_memory_usage_bytes', 'gauge', [700 * mib, 712 * mib, 705 * mib], 'bytes'),
+      counterSeries('gameap_server_block_io_read_bytes_total', 2_048),
+      counterSeries('gameap_server_block_io_write_bytes_total', 10_000),
+    ];
+    if (c.network) {
+      metrics.push(
+        counterSeries('gameap_server_network_receive_bytes_total', 24_000),
+        counterSeries('gameap_server_network_transmit_bytes_total', 68_000),
+      );
+    }
+
+    await openServer(page, null, metrics);
+
+    const strip = page.getByTestId('server-stats-cpu');
+    await expect(strip).toContainText('15.0%', { timeout: 20_000 });
+    await strip.click();
+
+    await expect(page.getByTestId('server-stats-cpu-chart')).toBeVisible({ timeout: 20_000 });
+    await expect(page.getByTestId('server-stats-memory-chart')).toBeVisible();
+    await expect(page.getByTestId('server-stats-disk-chart')).toBeVisible();
+    await expect(page.getByTestId('server-stats-network-chart')).toHaveCount(c.network ? 1 : 0);
+  });
+}

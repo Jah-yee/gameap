@@ -17,6 +17,7 @@
 
         <div v-if="hasAnyData" class="md:w-full md:grid md:grid-cols-2 md:gap-4">
             <n-card
+                v-if="hasCpu"
                 :title="trans('servers.statistics_cpu')"
                 class="mb-3"
                 header-class="g-card-header"
@@ -27,28 +28,34 @@
             </n-card>
 
             <n-card
+                v-if="hasMemory"
                 :title="trans('servers.statistics_memory')"
                 class="mb-3"
                 header-class="g-card-header"
                 :segmented="{ content: true, footer: 'soft' }"
+                data-testid="server-stats-memory-chart"
             >
                 <v-chart class="h-72 w-full" :option="memoryOption" :update-options="updateOptions" autoresize />
             </n-card>
 
             <n-card
+                v-if="hasDisk"
                 :title="trans('servers.statistics_disk_io')"
                 class="mb-3"
                 header-class="g-card-header"
                 :segmented="{ content: true, footer: 'soft' }"
+                data-testid="server-stats-disk-chart"
             >
                 <v-chart class="h-72 w-full" :option="diskOption" :update-options="updateOptions" autoresize />
             </n-card>
 
             <n-card
+                v-if="hasNetwork"
                 :title="trans('servers.statistics_network_io')"
                 class="mb-3"
                 header-class="g-card-header"
                 :segmented="{ content: true, footer: 'soft' }"
+                data-testid="server-stats-network-chart"
             >
                 <v-chart class="h-72 w-full" :option="networkOption" :update-options="updateOptions" autoresize />
             </n-card>
@@ -105,16 +112,14 @@ const {
     networkOutSeries,
 } = useServerMetricsWebSocket(() => props.serverId)
 
-const hasAnyData = computed(() => {
-    return (
-        cpuSeries.value.length > 0
-        || memoryBytesSeries.value.length > 0
-        || diskReadSeries.value.length > 0
-        || diskWriteSeries.value.length > 0
-        || networkInSeries.value.length > 0
-        || networkOutSeries.value.length > 0
-    )
-})
+// A process manager reports only what its platform can measure: a Windows service has no
+// per-process network counters. A chart it never feeds would stay empty, so it is not shown.
+const hasCpu = computed(() => cpuSeries.value.length > 0)
+const hasMemory = computed(() => memoryBytesSeries.value.length > 0)
+const hasDisk = computed(() => diskReadSeries.value.length > 0 || diskWriteSeries.value.length > 0)
+const hasNetwork = computed(() => networkInSeries.value.length > 0 || networkOutSeries.value.length > 0)
+
+const hasAnyData = computed(() => hasCpu.value || hasMemory.value || hasDisk.value || hasNetwork.value)
 
 
 function lastVal(list) {
