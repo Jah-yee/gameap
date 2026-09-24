@@ -149,6 +149,46 @@ func TestSource_Open_Authenticate(t *testing.T) {
 			wantError: "unable to read packet size",
 		},
 		{
+			name: "srcds_empty_response_value_with_foreign_id_is_invalid_packet",
+			handler: func(t *testing.T, conn net.Conn) {
+				t.Helper()
+				id, _, _, err := readSourcePacket(conn)
+				require.NoError(t, err)
+
+				reply := append(
+					buildSourcePacket(t, 99, serverDataResponseValue, ""),
+					buildSourcePacket(t, id, serverDataAuthResponse, "")...,
+				)
+				_, _ = conn.Write(reply)
+			},
+			wantError:   "auth response ID 99 does not match request ID 1",
+			wantErrorIs: ErrInvalidPacket,
+		},
+		{
+			name: "srcds_auth_response_with_foreign_id_is_invalid_packet",
+			handler: func(t *testing.T, conn net.Conn) {
+				t.Helper()
+				id, _, _, err := readSourcePacket(conn)
+				require.NoError(t, err)
+
+				_, _ = conn.Write(buildSRCDSAuthReply(t, id, 7))
+			},
+			wantError:   "auth response ID 7 does not match request ID 1",
+			wantErrorIs: ErrInvalidPacket,
+		},
+		{
+			name: "auth_response_with_foreign_id_is_invalid_packet",
+			handler: func(t *testing.T, conn net.Conn) {
+				t.Helper()
+				_, _, _, err := readSourcePacket(conn)
+				require.NoError(t, err)
+
+				_, _ = conn.Write(buildSourcePacket(t, 0, serverDataAuthResponse, ""))
+			},
+			wantError:   "auth response ID 0 does not match request ID 1",
+			wantErrorIs: ErrInvalidPacket,
+		},
+		{
 			name: "happy_path_authenticates_with_matching_response_id",
 			handler: func(t *testing.T, conn net.Conn) {
 				t.Helper()

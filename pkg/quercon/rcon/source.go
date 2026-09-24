@@ -117,8 +117,10 @@ func (s *Source) Execute(_ context.Context, command string) (string, error) {
 }
 
 func (s *Source) authenticate() error {
+	authID := s.requestID
+
 	// Send authentication packet
-	packet := s.buildPacket(s.requestID, serverDataAuth, s.password)
+	packet := s.buildPacket(authID, serverDataAuth, s.password)
 	if _, err := s.connection.Write(packet); err != nil {
 		return errors.WithMessage(err, "unable to send auth packet")
 	}
@@ -131,6 +133,10 @@ func (s *Source) authenticate() error {
 	// SRCDS answers an auth request with an empty SERVERDATA_RESPONSE_VALUE followed by the
 	// SERVERDATA_AUTH_RESPONSE. Minecraft and some other servers send the auth response alone.
 	if responseType == serverDataResponseValue {
+		if responseID != authID {
+			return errors.WithMessagef(ErrInvalidPacket, "auth response ID %d does not match request ID %d", responseID, authID)
+		}
+
 		responseID, responseType, _, err = s.readPacket()
 		if err != nil {
 			return err
@@ -144,6 +150,10 @@ func (s *Source) authenticate() error {
 	// The outcome travels in the ID field: -1 means the password was rejected.
 	if responseID == -1 {
 		return ErrAuthenticationFailed
+	}
+
+	if responseID != authID {
+		return errors.WithMessagef(ErrInvalidPacket, "auth response ID %d does not match request ID %d", responseID, authID)
 	}
 
 	s.requestID++
