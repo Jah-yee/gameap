@@ -102,11 +102,52 @@ func TestSource_buildPacket(t *testing.T) {
 func TestSource_Open_Authenticate(t *testing.T) {
 	t.Parallel()
 	tests := []struct {
-		name       string
-		handler    func(t *testing.T, conn net.Conn)
-		wantError  string
-		afterCheck func(t *testing.T, s *Source)
+		name        string
+		handler     func(t *testing.T, conn net.Conn)
+		wantError   string
+		wantErrorIs error
+		afterCheck  func(t *testing.T, s *Source)
 	}{
+		{
+			name: "srcds_empty_response_value_before_auth_response_authenticates",
+			handler: func(t *testing.T, conn net.Conn) {
+				t.Helper()
+				id, packetType, body, err := readSourcePacket(conn)
+				require.NoError(t, err)
+				assert.Equal(t, serverDataAuth, packetType, "first packet must be auth")
+				assert.Equal(t, "secret", body, "body must contain the password")
+
+				_, _ = conn.Write(buildSRCDSAuthReply(t, id, id))
+			},
+			afterCheck: func(t *testing.T, s *Source) {
+				t.Helper()
+				assert.Equal(t, int32(2), s.requestID,
+					"requestID should advance from 1 to 2 after a successful auth")
+			},
+		},
+		{
+			name: "srcds_rejected_password_after_empty_response_value",
+			handler: func(t *testing.T, conn net.Conn) {
+				t.Helper()
+				id, _, _, err := readSourcePacket(conn)
+				require.NoError(t, err)
+
+				_, _ = conn.Write(buildSRCDSAuthReply(t, id, -1))
+			},
+			wantError:   ErrAuthenticationFailed.Error(),
+			wantErrorIs: ErrAuthenticationFailed,
+		},
+		{
+			name: "connection_closed_after_empty_response_value",
+			handler: func(t *testing.T, conn net.Conn) {
+				t.Helper()
+				id, _, _, err := readSourcePacket(conn)
+				require.NoError(t, err)
+
+				_, _ = conn.Write(buildSourcePacket(t, id, serverDataResponseValue, ""))
+			},
+			wantError: "unable to read packet size",
+		},
 		{
 			name: "happy_path_authenticates_with_matching_response_id",
 			handler: func(t *testing.T, conn net.Conn) {
@@ -132,17 +173,35 @@ func TestSource_Open_Authenticate(t *testing.T) {
 				require.NoError(t, err)
 				_, _ = conn.Write(buildSourcePacket(t, -1, serverDataAuthResponse, ""))
 			},
-			wantError: ErrAuthenticationFailed.Error(),
+			wantError:   ErrAuthenticationFailed.Error(),
+			wantErrorIs: ErrAuthenticationFailed,
 		},
 		{
-			name: "auth_failure_when_server_returns_wrong_packet_type",
+			name: "unexpected_auth_response_type_is_invalid_packet",
 			handler: func(t *testing.T, conn net.Conn) {
 				t.Helper()
 				id, _, _, err := readSourcePacket(conn)
 				require.NoError(t, err)
-				_, _ = conn.Write(buildSourcePacket(t, id, serverDataResponseValue, ""))
+				_, _ = conn.Write(buildSourcePacket(t, id, 99, ""))
 			},
-			wantError: ErrAuthenticationFailed.Error(),
+			wantError:   "unexpected auth response type: 99",
+			wantErrorIs: ErrInvalidPacket,
+		},
+		{
+			name: "second_response_value_instead_of_auth_response_is_invalid_packet",
+			handler: func(t *testing.T, conn net.Conn) {
+				t.Helper()
+				id, _, _, err := readSourcePacket(conn)
+				require.NoError(t, err)
+
+				reply := append(
+					buildSourcePacket(t, id, serverDataResponseValue, ""),
+					buildSourcePacket(t, id, serverDataResponseValue, "")...,
+				)
+				_, _ = conn.Write(reply)
+			},
+			wantError:   "unexpected auth response type: 0",
+			wantErrorIs: ErrInvalidPacket,
 		},
 		{
 			name: "connection_closed_immediately_after_auth_send",
@@ -175,6 +234,10 @@ func TestSource_Open_Authenticate(t *testing.T) {
 			if tt.wantError != "" {
 				require.Error(t, err)
 				assert.Contains(t, err.Error(), tt.wantError, "error message must mention the failure cause")
+
+				if tt.wantErrorIs != nil {
+					assert.ErrorIs(t, err, tt.wantErrorIs)
+				}
 
 				return
 			}
@@ -218,6 +281,28 @@ func TestSource_Execute(t *testing.T) {
 				t.Helper()
 				assert.Equal(t, int32(3), s.requestID,
 					"requestID must advance after both auth and exec succeed")
+			},
+		},
+		{
+			name: "srcds_handshake_leaves_stream_aligned_for_first_command",
+			handler: func(t *testing.T, conn net.Conn) {
+				t.Helper()
+				authID, _, _, err := readSourcePacket(conn)
+				require.NoError(t, err)
+				_, _ = conn.Write(buildSRCDSAuthReply(t, authID, authID))
+
+				cmdID, packetType, body, err := readSourcePacket(conn)
+				require.NoError(t, err)
+				assert.Equal(t, serverDataExecCommand, packetType)
+				assert.Equal(t, "status", body)
+
+				_, _ = conn.Write(buildSourcePacket(t, cmdID, serverDataResponseValue, "hostname: Half-Life 2 Deathmatch\n"))
+			},
+			command: "status",
+			want:    "hostname: Half-Life 2 Deathmatch\n",
+			afterCheck: func(t *testing.T, s *Source) {
+				t.Helper()
+				assert.Equal(t, int32(3), s.requestID)
 			},
 		},
 		{
@@ -531,6 +616,18 @@ func readSourcePacket(conn net.Conn) (int32, int32, string, error) {
 	}
 
 	return id, packetType, string(body), nil
+}
+
+// buildSRCDSAuthReply assembles what SRCDS writes in reply to SERVERDATA_AUTH: an empty
+// SERVERDATA_RESPONSE_VALUE followed by the SERVERDATA_AUTH_RESPONSE, whose ID is the request
+// ID on success and -1 on a rejected password.
+func buildSRCDSAuthReply(t *testing.T, requestID, authResponseID int32) []byte {
+	t.Helper()
+
+	return append(
+		buildSourcePacket(t, requestID, serverDataResponseValue, ""),
+		buildSourcePacket(t, authResponseID, serverDataAuthResponse, "")...,
+	)
 }
 
 // buildSourcePacket assembles a Source RCON packet ready to be written to the wire.

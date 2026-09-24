@@ -123,15 +123,26 @@ func (s *Source) authenticate() error {
 		return errors.WithMessage(err, "unable to send auth packet")
 	}
 
-	// Read auth response
 	responseID, responseType, _, err := s.readPacket()
 	if err != nil {
 		return err
 	}
 
-	// Check if authentication was successful
-	// A failed auth returns -1 as the request ID
-	if responseID == -1 || responseType != serverDataAuthResponse {
+	// SRCDS answers an auth request with an empty SERVERDATA_RESPONSE_VALUE followed by the
+	// SERVERDATA_AUTH_RESPONSE. Minecraft and some other servers send the auth response alone.
+	if responseType == serverDataResponseValue {
+		responseID, responseType, _, err = s.readPacket()
+		if err != nil {
+			return err
+		}
+	}
+
+	if responseType != serverDataAuthResponse {
+		return errors.WithMessagef(ErrInvalidPacket, "unexpected auth response type: %d", responseType)
+	}
+
+	// The outcome travels in the ID field: -1 means the password was rejected.
+	if responseID == -1 {
 		return ErrAuthenticationFailed
 	}
 
