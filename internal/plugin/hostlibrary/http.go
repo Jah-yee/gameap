@@ -197,9 +197,11 @@ func (s *HTTPServiceImpl) Fetch(
 // resolving the hostname, checking each candidate IP against the SSRF
 // blocklist, and dialing the CHOSEN IP rather than the hostname. Dialing
 // the IP closes the DNS-rebinding window between resolution and connect.
+//
+// There is no proxy, not even from HTTP(S)_PROXY: through one, DialContext
+// would see only the proxy's address and the target would never be checked.
 func (s *HTTPServiceImpl) client(_ context.Context) *stdhttp.Client {
 	transport := &stdhttp.Transport{
-		Proxy: stdhttp.ProxyFromEnvironment,
 		DialContext: func(dialCtx context.Context, network, address string) (net.Conn, error) {
 			ip, port, dialErr := s.resolveAndCheck(dialCtx, address)
 			if dialErr != nil {
@@ -208,11 +210,11 @@ func (s *HTTPServiceImpl) client(_ context.Context) *stdhttp.Client {
 
 			return s.dialer.DialContext(dialCtx, network, net.JoinHostPort(ip.String(), port))
 		},
-		// Conservative defaults — short keep-alive, no idle reuse across
-		// requests so a future redirect that lands on a different host
-		// cannot accidentally reuse a previous connection.
-		MaxIdleConns:          0,
-		IdleConnTimeout:       0,
+		// The transport lives for one Fetch, so an idle kept-alive connection
+		// would stay open with nothing left to reuse or close it. Without
+		// keep-alives every connection, redirect hops included, closes once
+		// its response is read.
+		DisableKeepAlives:     true,
 		ResponseHeaderTimeout: s.timeoutCap,
 		ExpectContinueTimeout: 1 * time.Second,
 	}
@@ -233,8 +235,9 @@ func (s *HTTPServiceImpl) client(_ context.Context) *stdhttp.Client {
 	}
 }
 
-// validateURL checks scheme and resolves the host so we can fail fast on
-// invalid URLs and obviously-blocked targets before any TCP work.
+// validateURL checks the scheme and that a host is present, so a malformed
+// URL fails before any network IO. Target addresses are judged at dial time
+// by resolveAndCheck.
 func (s *HTTPServiceImpl) validateURL(raw string) error {
 	u, err := url.Parse(raw)
 	if err != nil {
@@ -298,21 +301,8 @@ func (s *HTTPServiceImpl) resolveAndCheck(ctx context.Context, address string) (
 }
 
 func (s *HTTPServiceImpl) checkIP(ip netip.Addr, allowBypass bool) error {
-	// Cloud metadata is always blocked, regardless of allow-list.
-	if netutil.IsCloudMetadataIP(ip) {
-		return errors.Wrapf(errBlockedTarget, "ip=%s reason=%s", ip, netutil.BlockReasonCloudMetadata)
-	}
-
-	if !s.cfg.BlockPrivateIPs {
-		return nil
-	}
-
-	if allowBypass {
-		return nil
-	}
-
-	if reason := netutil.BlockReason(ip); reason != "" {
-		return errors.Wrapf(errBlockedTarget, "ip=%s reason=%s", ip, reason)
+	if reason := netutil.DialBlockReason(ip, s.cfg.BlockPrivateIPs, allowBypass); reason != "" {
+		return errors.Wrap(errBlockedTarget, netutil.BlockedDialDetail(ip, reason))
 	}
 
 	return nil

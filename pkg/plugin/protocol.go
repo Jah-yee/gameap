@@ -233,21 +233,8 @@ func (r *ProtocolRunner) resolveAndCheck(ctx context.Context, address string) (n
 }
 
 func (r *ProtocolRunner) checkIP(ip netip.Addr, allowBypass bool) error {
-	// An IPv4-mapped IPv6 address (::ffff:169.254.169.254) routes to the IPv4
-	// target but fails the Is4-based checks in netutil, so canonicalise before
-	// any policy decision.
-	ip = ip.Unmap()
-
-	if netutil.IsCloudMetadataIP(ip) {
-		return errors.Wrapf(ErrDialBlocked, "ip=%s reason=%s", ip, netutil.BlockReasonCloudMetadata)
-	}
-
-	if !r.policy.BlockPrivateIPs || allowBypass {
-		return nil
-	}
-
-	if reason := netutil.BlockReason(ip); reason != "" {
-		return errors.Wrapf(ErrDialBlocked, "ip=%s reason=%s", ip, reason)
+	if reason := netutil.DialBlockReason(ip, r.policy.BlockPrivateIPs, allowBypass); reason != "" {
+		return errors.Wrap(ErrDialBlocked, netutil.BlockedDialDetail(ip, reason))
 	}
 
 	return nil

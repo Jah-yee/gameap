@@ -69,6 +69,17 @@ func TestSSH_SSRF_CloudMetadataIsAlwaysBlocked(t *testing.T) {
 		"100.100.100.200",
 		"fd00:ec2::254",
 		"::ffff:169.254.169.254",
+		"::ffff:100.100.100.200",
+		"64:ff9b::a9fe:a9fe",
+		"2002:a9fe:a9fe::",
+		"::a9fe:a9fe",
+		"64:ff9b:1::a9fe:a9fe",
+		"64:ff9b:1:a9fe:a9:fe00::",
+		"2001:0:4136:e378:8000:63bf:5601:5601",
+		"::ffff:0:a9fe:a9fe",
+		"169.254.170.2",
+		"fd20:ce::254",
+		"168.63.129.16",
 	}
 
 	for _, blockPrivate := range []bool{true, false} {

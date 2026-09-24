@@ -2,8 +2,10 @@ package hostlibrary
 
 import (
 	"context"
+	"net"
 	"net/http"
 	"net/http/httptest"
+	"sync/atomic"
 	"testing"
 	"time"
 
@@ -278,6 +280,52 @@ func TestHTTPService_Fetch_DeleteMethod(t *testing.T) {
 	require.NoError(t, err)
 	assert.Nil(t, resp.Error)
 	assert.Equal(t, int32(204), resp.StatusCode)
+}
+
+// Every Fetch builds its own transport, so a kept-alive connection would stay
+// open with nothing left to reuse or close it, and a plugin looping on Fetch
+// could exhaust the panel's file descriptors. Every connection, redirect hops
+// included, must close once its response is read.
+func TestHTTPService_Fetch_ClosesConnections(t *testing.T) {
+	t.Parallel()
+
+	var open atomic.Int32
+
+	server := httptest.NewUnstartedServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path == "/redirect" {
+			http.Redirect(w, r, "/", http.StatusFound)
+
+			return
+		}
+
+		_, _ = w.Write([]byte("ok"))
+	}))
+	server.Config.ConnState = func(_ net.Conn, state http.ConnState) {
+		if state == http.StateNew {
+			open.Add(1)
+		}
+
+		if state == http.StateClosed {
+			open.Add(-1)
+		}
+	}
+	server.Start()
+	defer server.Close()
+
+	svc := NewHTTPService(permissiveTestConfig())
+
+	for range 5 {
+		resp, err := svc.Fetch(context.Background(), &sdkhttp.HTTPFetchRequest{
+			Url:    server.URL + "/redirect",
+			Method: "GET",
+		})
+
+		require.NoError(t, err)
+		require.Nil(t, resp.Error)
+	}
+
+	assert.Eventually(t, func() bool { return open.Load() == 0 }, 2*time.Second, 10*time.Millisecond,
+		"connections stayed open after the fetches returned")
 }
 
 func TestNewHTTPHostLibrary(t *testing.T) {

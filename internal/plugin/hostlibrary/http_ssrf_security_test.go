@@ -83,6 +83,38 @@ func TestHTTPService_SSRF_BlocksLoopback(t *testing.T) {
 	assert.Contains(t, *resp.Error, "loopback")
 }
 
+// TestHTTPService_SSRF_BlocksIPv4MappedUnspecified — OWASP API7:2023 —
+// ::ffff:0.0.0.0 is dialed as plain IPv4 0.0.0.0, which the OS routes to the
+// local host. The filter must see through the mapping; otherwise the default
+// config lets a plugin into every loopback service.
+func TestHTTPService_SSRF_BlocksIPv4MappedUnspecified(t *testing.T) {
+	t.Parallel()
+
+	var hits atomic.Int32
+
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		hits.Add(1)
+		w.WriteHeader(http.StatusOK)
+	}))
+	defer server.Close()
+
+	_, port, err := net.SplitHostPort(server.Listener.Addr().String())
+	require.NoError(t, err)
+
+	svc := NewHTTPService(strictTestConfig())
+
+	resp, err := svc.Fetch(context.Background(), &sdkhttp.HTTPFetchRequest{
+		Url:    "http://" + net.JoinHostPort("::ffff:0.0.0.0", port) + "/",
+		Method: "GET",
+	})
+
+	require.NoError(t, err)
+	require.NotNil(t, resp.Error, "the request reached the loopback server with status %d", resp.StatusCode)
+	assert.Contains(t, *resp.Error, "blocked")
+	assert.Contains(t, *resp.Error, "unspecified")
+	assert.Zero(t, hits.Load(), "a blocked target must never receive the request")
+}
+
 // TestHTTPService_SSRF_BlocksRFC1918 — OWASP API7:2023 — private IPs are
 // blocked. Covers 10/8, 172.16/12, 192.168/16.
 func TestHTTPService_SSRF_BlocksRFC1918(t *testing.T) {
@@ -125,6 +157,25 @@ func TestHTTPService_SSRF_BlocksCloudMetadata(t *testing.T) {
 			for _, target := range []string{
 				"http://169.254.169.254/latest/meta-data/",
 				"http://100.100.100.200/",
+				// IPv6 spellings that reach the same endpoints: IPv4-mapped
+				// (dialed as plain IPv4), NAT64, 6to4 and IPv4-compatible.
+				"http://[::ffff:169.254.169.254]/latest/meta-data/",
+				"http://[::ffff:100.100.100.200]/",
+				"http://[64:ff9b::a9fe:a9fe]/latest/meta-data/",
+				"http://[2002:a9fe:a9fe::]/latest/meta-data/",
+				"http://[::a9fe:a9fe]/latest/meta-data/",
+				// Local-use NAT64 (/96 and /48 layouts), Teredo, SIIT.
+				"http://[64:ff9b:1::a9fe:a9fe]/latest/meta-data/",
+				"http://[64:ff9b:1:a9fe:a9:fe00::]/latest/meta-data/",
+				"http://[2001:0:4136:e378:8000:63bf:5601:5601]/latest/meta-data/",
+				"http://[::ffff:0:a9fe:a9fe]/latest/meta-data/",
+				// AWS over IPv6, plain and zoned.
+				"http://[fd00:ec2::254]/latest/meta-data/",
+				"http://[fd00:ec2::254%25eth0]/latest/meta-data/",
+				// Endpoints of other providers.
+				"http://169.254.170.2/v2/credentials/",
+				"http://[fd20:ce::254]/computeMetadata/v1/",
+				"http://168.63.129.16/machine?comp=goalstate",
 			} {
 				resp, err := svc.Fetch(context.Background(), &sdkhttp.HTTPFetchRequest{
 					Url:    target,
@@ -132,12 +183,82 @@ func TestHTTPService_SSRF_BlocksCloudMetadata(t *testing.T) {
 				})
 
 				require.NoError(t, err)
-				require.NotNil(t, resp.Error)
+				require.NotNil(t, resp.Error, "%s must be blocked", target)
 				assert.Contains(t, *resp.Error, "cloud_metadata",
-					"cloud-metadata IP must be blocked regardless of BlockPrivateIPs=%v", blockPrivate)
+					"%s must be blocked regardless of BlockPrivateIPs=%v", target, blockPrivate)
 			}
 		})
 	}
+}
+
+// TestHTTPService_SSRF_BlocksHostnameResolvingToMappedMetadata — OWASP
+// API7:2023 — the pure-Go resolver returns /etc/hosts IPv4 entries in their
+// 16-byte form, so a name like metadata.google.internal comes back as
+// ::ffff:169.254.169.254. It must stay blocked with BlockPrivateIPs off.
+func TestHTTPService_SSRF_BlocksHostnameResolvingToMappedMetadata(t *testing.T) {
+	t.Parallel()
+	resolver := &fakeResolver{
+		mapping: map[string][]netip.Addr{
+			"metadata.google.internal": {netip.MustParseAddr("::ffff:169.254.169.254")},
+		},
+	}
+
+	cfg := strictTestConfig()
+	cfg.BlockPrivateIPs = false
+
+	svc := newHTTPService(cfg, resolver, &net.Dialer{})
+
+	resp, err := svc.Fetch(context.Background(), &sdkhttp.HTTPFetchRequest{
+		Url:    "http://metadata.google.internal/computeMetadata/v1/",
+		Method: "GET",
+	})
+
+	require.NoError(t, err)
+	require.NotNil(t, resp.Error)
+	assert.Contains(t, *resp.Error, "ip=169.254.169.254 reason=cloud_metadata requested=::ffff:169.254.169.254")
+}
+
+// TestHTTPService_SSRF_IgnoresEnvironmentProxy — OWASP API7:2023 — through
+// an HTTP(S)_PROXY the transport would dial only the proxy, and the proxy
+// would then fetch any target for the plugin, cloud metadata included. The
+// plugin transport must dial every target itself.
+func TestHTTPService_SSRF_IgnoresEnvironmentProxy(t *testing.T) {
+	var hits atomic.Int32
+
+	proxy := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		hits.Add(1)
+		w.WriteHeader(http.StatusOK)
+	}))
+	defer proxy.Close()
+
+	t.Setenv("HTTP_PROXY", proxy.URL)
+	t.Setenv("HTTPS_PROXY", proxy.URL)
+
+	// The proxy itself would pass the gate: it is loopback and allow-listed.
+	cfg := strictTestConfig()
+	cfg.AllowedHosts = []string{"127.0.0.1"}
+
+	svc := NewHTTPService(cfg)
+
+	transport, ok := svc.client(context.Background()).Transport.(*http.Transport)
+	require.True(t, ok)
+	assert.Nil(t, transport.Proxy)
+
+	for _, target := range []string{
+		"http://169.254.169.254/latest/meta-data/",
+		"http://10.0.0.5/admin",
+	} {
+		resp, err := svc.Fetch(context.Background(), &sdkhttp.HTTPFetchRequest{
+			Url:    target,
+			Method: "GET",
+		})
+
+		require.NoError(t, err)
+		require.NotNil(t, resp.Error, "%s was answered through the proxy", target)
+		assert.Contains(t, *resp.Error, "target ip is blocked")
+	}
+
+	assert.Zero(t, hits.Load(), "no request may go through the proxy")
 }
 
 // TestHTTPService_SSRF_BlocksHostnameResolvingToPrivate — OWASP API7:2023 —

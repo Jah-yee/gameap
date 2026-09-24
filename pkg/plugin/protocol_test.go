@@ -157,6 +157,13 @@ func TestRunner_CheckIP_MappedAddresses(t *testing.T) {
 		{"mapped_private_strict", "::ffff:10.0.0.5", strict, true},
 		{"mapped_cgnat_permissive", "::ffff:100.64.1.1", permissive, false},
 		{"mapped_public", "::ffff:8.8.8.8", strict, false},
+		{"nat64_metadata_permissive", "64:ff9b::a9fe:a9fe", permissive, true},
+		{"6to4_metadata_permissive", "2002:a9fe:a9fe::", permissive, true},
+		{"nat64_private_strict", "64:ff9b::a00:5", strict, true},
+		{"nat64_public_strict", "64:ff9b::808:808", strict, false},
+		{"local_use_nat64_metadata_permissive", "64:ff9b:1::a9fe:a9fe", permissive, true},
+		{"local_use_nat64_public_strict", "64:ff9b:1::808:808", strict, false},
+		{"teredo_metadata_permissive", "2001:0:4136:e378:8000:63bf:5601:5601", permissive, true},
 	}
 
 	for _, tt := range tests {
@@ -416,8 +423,19 @@ func TestRunner_ResolveAndCheck(t *testing.T) {
 			address:      allowedHost + ":27015",
 			resolved:     []string{"::ffff:169.254.169.254"},
 			wantSentinel: ErrDialBlocked,
-			wantError:    "ip=169.254.169.254 reason=cloud_metadata",
+			wantError:    "ip=169.254.169.254 reason=cloud_metadata requested=::ffff:169.254.169.254",
 			wantLookups:  []string{allowedHost},
+		},
+		{
+			// The embedded IPv4 is only what the policy judges: the NAT64
+			// address itself is dialed, or IPv6-only hosts lose IPv4 targets.
+			name:        "nat64_answer_is_dialed_as_resolved",
+			policy:      NetDialPolicy{BlockPrivateIPs: true},
+			address:     allowedHost + ":27015",
+			resolved:    []string{"64:ff9b::808:808"},
+			wantIP:      "64:ff9b::808:808",
+			wantPort:    "27015",
+			wantLookups: []string{allowedHost},
 		},
 		{
 			name: "allowed_host_bypasses_private_block",

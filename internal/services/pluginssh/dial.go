@@ -54,22 +54,8 @@ func (s *Service) resolveAndCheck(ctx context.Context, host string) (netip.Addr,
 }
 
 func (s *Service) checkIP(ip netip.Addr, allowBypass bool) error {
-	// An IPv4-mapped IPv6 address routes to the IPv4 target but fails the
-	// Is4-based checks, so canonicalise before deciding.
-	ip = ip.Unmap()
-
-	// Cloud metadata is blocked whatever the operator allowed: it hands out
-	// credentials of the machine the panel runs on.
-	if netutil.IsCloudMetadataIP(ip) {
-		return errors.Wrapf(ErrDialBlocked, "ip=%s reason=%s", ip, netutil.BlockReasonCloudMetadata)
-	}
-
-	if !s.cfg.BlockPrivateIPs || allowBypass {
-		return nil
-	}
-
-	if reason := netutil.BlockReason(ip); reason != "" {
-		return errors.Wrapf(ErrDialBlocked, "ip=%s reason=%s", ip, reason)
+	if reason := netutil.DialBlockReason(ip, s.cfg.BlockPrivateIPs, allowBypass); reason != "" {
+		return errors.Wrap(ErrDialBlocked, netutil.BlockedDialDetail(ip, reason))
 	}
 
 	return nil
